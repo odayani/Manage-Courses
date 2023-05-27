@@ -1,0 +1,61 @@
+{
+  "111": {
+    "id": "111",
+    "name": "Algo",
+    "lecturer": "Zur",
+    "start_date": "2023-05-27",
+    "end_date": "2023-05-27",
+    "prerequisite_course": [
+      "Course1",
+      " Course3"
+    ],
+    "students": {
+      "444": {
+        "id": "444",
+        "first_name": "asd",
+        "second_name": "asd",
+        "score": 90,
+        "image": "asd"
+      }
+    }
+  },
+  "222": {
+    "id": "222",
+    "name": "Mevuzrot",
+    "lecturer": "Miriam",
+    "start_date": "2023-05-27",
+    "end_date": "2023-05-27",
+    "prerequisite_course": [
+      "Mevuzrot1",
+      " Mevuzarot3"
+    ],
+    "students": {
+      "1111": {
+        "id": "1111",
+        "first_name": "Oded",
+        "second_name": "Atias",
+        "score": 88,
+        "image": "asd"
+      }
+    }
+  },
+  "3124": {
+    "id": "3124",
+    "name": "sdfsd",
+    "lecturer": "fsdf",
+    "start_date": "2023-05-27",
+    "end_date": "2023-05-27",
+    "prerequisite_course": [
+      ""
+    ],
+    "students": {
+      "כ": {
+        "id": "כ",
+        "first_name": "כ",
+        "second_name": "כ",
+        "score": 1,
+        "image": "כ"
+      }
+    }
+  }
+}

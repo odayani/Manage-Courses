@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script type="text/javascript" src="index.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Courses</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
+</head>
+
+<body class="d-flex flex-column min-vh-100" onload="getExistsCourses()">
+  <!-- Header Section -->
+  <header>
+    <h1 class="bg-primary text-center p-3 text-white">Courses Management</h1>
+
+    <!-- Button trigger add modal -->
+    <button type="button" onclick="openAddCourseModal()" class="btn btn-outline-info" data-bs-toggle="modal"
+      data-bs-target="#courseModal">
+      Add course
+    </button>
+    <!-- Button trigger add modal -->
+  </header>
+
+  <!-- Table Section -->
+  <main class="flex-grow-1">
+    <!-- JS Scripts -->
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Course name</th>
+            <th scope="col">Lecturer name</th>
+            <th scope="col">Start date</th>
+            <th scope="col">End date</th>
+            <th scope="col">Prerequisite</th>
+            <th scope="col">Students</th>
+            <th scope="col">Manage course</th>
+          </tr>
+        </thead>
+        <tbody id="table1"></tbody>
+      </table>
+    </div>
+
+    <!-- Add/Edit course Modal -->
+    <div class="modal fade" id="courseModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="courseModalTitle"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-md-6">
+                  <form id="courseForm" onsubmit="submitCourseForm();return false;">
+                    <div class="mb-3">
+                      <input type="text" class="form-control" id="courseNumber" placeholder="Course ID" required />
+                    </div>
+                    <div class="mb-3">
+                      <input type="text" class="form-control" id="courseName" placeholder="Course Name" required />
+                    </div>
+                    <div class="mb-3">
+                      <input type="text" class="form-control" id="lecturerName" placeholder="Lecturer name" required />
+                    </div>
+                    <div class="mb-3">
+                      <input type="date" class="form-control" id="startDate" placeholder="Start date" required />
+                    </div>
+                    <div class="mb-3">
+                      <input type="date" class="form-control" id="endDate" name="endDate" required />
+                    </div>
+                    <div class="mb-3">
+                      <input class="form-control" id="prerequisiteCourses" name="prerequisiteCourses"/>
+                    </div>
+                    <div>
+                      <button type="button" id="closeAddModal" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                      </button>
+                      <button type="submit" id="courseModalButton" class="btn btn-primary"></button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Add/Edit course Modal -->
+
+    <!-- Manage students Modal -->
+    <div class="modal fade" id="manageStudentsModal" tabindex="-1">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Manage Students</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row justify-content-center">
+                <form id="courseForm" onsubmit="submitManageStudentsForm();return false;">
+                  <div class="d-flex">
+                    <div class="mb-3">
+                      <input type="text" class="form-control" id="studentId" placeholder="Student ID" required />
+                    </div>
+                    <div class="mb-3">
+                      <input type="text" class="form-control" id="studentFirstName" placeholder="First Name" required />
+                    </div>
+                    <div class="mb-3">
+                      <input type="text" class="form-control" id="studentSecondName" placeholder="Second Name"
+                        required />
+                    </div>
+                    <div class="mb-3">
+                      <input type="text" class="form-control" id="studentImageUrl" placeholder="Image url" required />
+                    </div>
+                    <div class="mb-3">
+                      <input type="number" min="0" max="100" class="form-control" id="studentScore" placeholder="Score"
+                        required />
+                    </div>
+
+                    <div class="mb-3">
+                      <button type="submit" id="manageStudentsModalButton" class="btn btn-primary">
+                        Submit
+                      </button>
+
+                      <button type="button" id="closeStudentsModal" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                      </button>
+                    </div>
+                  </div>
+
+
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Id</th>
+                          <th scope="col">Image</th>
+                          <th scope="col">First Name</th>
+                          <th scope="col">Second name</th>
+                          <th scope="col">Score</th>
+                          <th scope="col">Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody id="table2"></tbody>
+                    </table>
+                  </div>
+
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- manage students Modal -->
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="bg-primary text-center py-3 text-white m-0">
+    <div class="container">
+      <p>Oded Atias and Or Dayani</p>
+    </div>
+  </footer>
+</body>
+
+</html>
